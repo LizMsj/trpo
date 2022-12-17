@@ -1,6 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.ObjectModel;
 using System.Security.Cryptography.Pkcs;
 using System.Windows;
+using System.Collections.Generic;
+using System.Windows.Markup;
+using Newtonsoft.Json;
+using System.IO;
+
 namespace SQLiteApp
 {
     public partial class MainWindow : Window
@@ -81,6 +87,27 @@ namespace SQLiteApp
             if (user is null) return;
             db.Users.Remove(user);
             db.SaveChanges();
+        }
+        private void CreateExcelfile(object sender, RoutedEventArgs e)
+        {
+            EEExlEEE report = new EEExlEEE();
+            report.CreateExcelfile(db.Users.Local.ToObservableCollection());
+        }
+        private void CreateJsonfile(object sender, RoutedEventArgs e)
+        {
+            var Json = JsonConvert.SerializeObject(DataContext);
+            string DRpath = "Reports";
+            if (Directory.Exists(DRpath) == false)
+            {
+                Directory.CreateDirectory(DRpath);
+            }
+            string exportfile = "Report.json";
+            DRpath = System.IO.Path.Combine(DRpath, exportfile);
+            if (File.Exists(DRpath))
+                File.Delete(DRpath);
+            FileStream objFileStrm = File.Create(DRpath);
+            objFileStrm.Close();
+            File.WriteAllText(DRpath, Json.ToString());
         }
     }
 }
