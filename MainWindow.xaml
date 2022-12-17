@@ -10,29 +10,32 @@
             <RowDefinition />
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100" />
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <ListBox x:Name="usersList" ItemsSource="{Binding}">
+        
+        <ListBox x:Name="usersList" ItemsSource="{Binding}" SelectionMode="Multiple">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
-                        <TextBlock Text="{Binding Id}" FontSize="13"/>
-                        <TextBlock Text="{Binding Name}" FontSize="16" />
-                        <TextBlock Text="{Binding Family}" FontSize="13" />
-                        <TextBlock Text="{Binding Patronymicl}" FontSize="13" />
-                        <TextBlock Text="{Binding Telephone}" FontSize="13" />
-                        <TextBlock Text="{Binding Birthday}" FontSize="13" />
-                        <TextBlock Text="{Binding Department}" FontSize="13" />
-                    </StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Id}" FontSize="13" Margin="5"/>
+                        <TextBlock Text="{Binding Name}" Grid.Column ="1" FontSize="13" Margin="5" />
+                        <TextBlock Text="{Binding Family}" Grid.Column ="2" FontSize="13" Margin="5" />
+                        <TextBlock Text="{Binding Patronymicl}" Grid.Column ="3" FontSize="13" Margin="5" />
+                        <TextBlock Text="{Binding Telephone}" Grid.Column ="4" FontSize="13" Margin="5" />
+                        <TextBlock Text="{Binding Birthday}" Grid.Column ="5" FontSize="13" Margin="5" />
+                        <TextBlock Text="{Binding Department}" Grid.Column ="6" FontSize="13" Margin="5" />
+                    </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Grid.ColumnSpan="5">
             <Button Content="Добавить" Margin="10" Click="Add_Click" />
             <Button Content="Изменить" Margin="10" Click="Edit_Click"  />
             <Button Content="Удалить" Margin="10" Click="Delete_Click"  />
